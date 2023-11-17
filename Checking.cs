@@ -11,8 +11,6 @@ namespace ThePenguinBank
         public double Balance { get; set; }
         public Checking(double customerID, int accountID, double balance) : base(customerID, accountID)
         {
-            CustomerID = customerID;
-            AccountID = accountID;
             Balance = balance;
         }
     }

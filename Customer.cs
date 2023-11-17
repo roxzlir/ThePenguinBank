@@ -12,12 +12,9 @@ namespace ThePenguinBank
         public double SecurityNumber { get; set; }
         public int MaxAttempd { get; set; }
         public string UserNameCustomer { get; set; }
-        public double CustomerID { get; set; }
-        public int AccountID { get; set; }
+
         public Customer(double customerID, int accountID, string name, double securityNumber, int maxAttempds, string userNameCustomer) :base(customerID,accountID)
         {
-            CustomerID = customerID;
-            AccountID = accountID;
             Name = name;
             SecurityNumber = securityNumber;
             MaxAttempd = maxAttempds;
