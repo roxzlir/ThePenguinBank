@@ -20,8 +20,8 @@ internal class Admin
         }
         return userInput;
     }
- InternalTransfer
-    }
+
+    
     public Customer CreateNewCustomer()
     {
         Console.Write("To add a new customer, please enter a new customer ID: ");
