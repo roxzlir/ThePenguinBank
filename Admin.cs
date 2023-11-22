@@ -3,7 +3,7 @@ namespace ThePenguinBank;
 internal class Admin
 {
 
-    public static double GetInputNumber()
+    public static double GetInputNumber() 
     {
         double userInput;
         while (true)

@@ -246,7 +246,7 @@
                     Console.WriteLine($"{i + 1}. {AccountList[i]}");
                 }
 
-                var fromAccount = int.Parse(Console.ReadLine()) - 1;
+                var fromAccount = int.Parse(Console.ReadLine()) - 1; 
 
                 Console.WriteLine("What account do you want to transfer to?");
 
