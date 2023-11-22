@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ThePenguinBank
+﻿namespace ThePenguinBank
 {
-    internal class Saving: Account
+    internal class Saving : Account
     {
-        public double Balance { get; set; }
-
-        public Saving (double customerID, int accountID, double balance) : base(customerID, accountID)
-        {
-            Balance = balance;
+        public Saving(double customerID, int accountID, double balance) : base(customerID, accountID, balance)
+        { 
         }
     }
 }

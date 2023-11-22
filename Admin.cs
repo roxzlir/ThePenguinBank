@@ -1,17 +1,9 @@
 namespace ThePenguinBank;
 
-internal class Admin : Account
+internal class Admin
 {
-    public Admin(double customerID, int accountID, string newCustomer, string userName) : base(customerID, accountID)
-    {
-        NewCustomer = newCustomer;
-        UserName = userName;
-    }
 
-    public string NewCustomer { get; set; }
-    public string UserName { get; set; }
-
-    public static double GetInputNumber()
+    public static double GetInputNumber() 
     {
         double userInput;
         while (true)
@@ -27,6 +19,8 @@ internal class Admin : Account
             }
         }
         return userInput;
+    }
+ InternalTransfer
     }
     public Customer CreateNewCustomer()
     {
@@ -71,3 +65,4 @@ internal class Admin : Account
     }
 
 }
+
