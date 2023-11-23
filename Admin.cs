@@ -2,30 +2,12 @@ namespace ThePenguinBank;
 
 internal class Admin
 {
-    
-    public static double GetInputNumber() 
-    {
-        double userInput;
-        while (true)
-        {
-            string inputNumber = Console.ReadLine();
-            if (double.TryParse(inputNumber, out userInput))
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("You made an incorrect entry, please enter integers only.");
-            }
-        }
-        return userInput;
-    }
 
 
     public static Customer CreateNewCustomer()
     {
         Console.Write("To add a new customer, please enter a new customer ID: ");
-        double customerID = GetInputNumber();
+        double customerID = Program.GetInputNumber();
         Random numberGenerator = new Random();
         int accountID = numberGenerator.Next(40000000, 49999999);
         Console.WriteLine($"A checking account have automaticlly been created to {customerID}, accountnumber: {accountID}");
@@ -35,11 +17,11 @@ internal class Admin
         int balance = 0;
 
         Console.Write("Please enter a password for this customer: ");
-        double password = GetInputNumber();
+        double password = Program.GetInputNumber();
 
         Console.WriteLine("A new customer is now created, please press 1 and enter if you want a overview of the complete customer data. To exit this menu, press 0");
         Console.Write("Enter choice: ");
-        double menuChoice = GetInputNumber();
+        double menuChoice = Program.GetInputNumber();
 
         if (menuChoice == 1)
         {
@@ -56,7 +38,8 @@ internal class Admin
         Program.logInList.Add(createdCustomer);
         return createdCustomer;
     }
-    static void SEKToUSD()
+
+    public static void SEKToUSD()
     {
         Console.Write("Convert an amount in Swedish Krona (SEK) to US Dollar (USD): ");
         decimal SEK = Convert.ToDecimal(Console.ReadLine());
@@ -76,7 +59,7 @@ internal class Admin
             Console.WriteLine("3. Print Accounts");
             Console.WriteLine("4. Transfer money between your accounts");
             Console.WriteLine("0. Close program");
-            double choice = GetInputNumber();
+            double choice = Program.GetInputNumber();
             switch (choice)
             {
                 case 1:
