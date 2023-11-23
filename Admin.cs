@@ -66,7 +66,8 @@ internal class Admin
     }
     static void AdminMenu()
     {
-        double choice = GetInputNumber();
+        Program.PrintLogo();
+        
 
         do
         {
@@ -75,6 +76,7 @@ internal class Admin
             Console.WriteLine("3. Print Accounts");
             Console.WriteLine("4. Transfer money between your accounts");
             Console.WriteLine("0. Close program");
+            double choice = GetInputNumber();
             switch (choice)
             {
                 case 1:
@@ -97,7 +99,7 @@ internal class Admin
                     Console.WriteLine("That was not a valid choice.");
                     break;
             }
-        } while (choice != 0);
+        } while (true);
     }
 
 }
