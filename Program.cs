@@ -6,8 +6,6 @@
         {
             Console.WriteLine("Hello, World!");
         }
-
-
         public static int GetInputNumber()
         {
             int userInput;
