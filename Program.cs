@@ -1,4 +1,6 @@
-﻿namespace ThePenguinBank
+﻿using System.Runtime.CompilerServices;
+
+namespace ThePenguinBank
 {
     internal class Program
     {
@@ -8,18 +10,24 @@
 
         static void Main()
         {
-            Admin admin = new Admin();
-            Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
+            
+            //Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
             Customer customer1 = new Customer(9907139100, 400002, 12333, "Theres", 124);
-            LoginAs();
+            //logInList.Add(customer);
+            logInList.Add(customer1);
+            Admin.CreateNewCustomer();
+
+            CustomerMenu();
             Run();
-            Menu();
+           
             Console.WriteLine("Hello, World!");
+            
         }
 
 
         static void Run()
         {
+            ;   
             int loginReturnResult = LoginAs();
 
             switch (loginReturnResult)
@@ -49,7 +57,7 @@
             }
         }
 
-        static int Menu()
+        static int CustomerMenu()
         {
             int choice;
 
@@ -122,7 +130,10 @@
 
             while (attempts < maxAttempts)
             {
+                Console.Write("Please enter customer ID: ");
+                
                 double userCustomerIDInput = GetInputNumber();
+                Console.Write($"Please enter password for ID {userCustomerIDInput}: ");
                 double userPasswordInput = GetInputNumber();
 
                 foreach (var customer in logInList)
@@ -130,6 +141,7 @@
                     if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
                     {
                         return 1;
+
                     }
                     else if (userCustomerIDInput == 511 && userPasswordInput == 00000)
                     {
@@ -137,8 +149,9 @@
                     }
                     else
                     {
-                        Console.WriteLine("You need to enter a valid login");
+                        Console.WriteLine("You need to enter a valid log in.");
                     }
+
                 }
             }
 
