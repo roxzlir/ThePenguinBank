@@ -3,19 +3,13 @@
 
 ﻿using Pastel;
 using System.Drawing;
-
-
 namespace ThePenguinBank
 {
-    internal class Program
+    public class Program
     {
-        
-        public static List<Customer> logInList = new();
-
-
+        public static readonly List<Customer> logInList = new();
         static void Main()
         {
-
             Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
             Customer customer1 = new Customer(9907139100, 400002, 12333, "Theres", 124);
             logInList.Add(customer);
@@ -29,90 +23,28 @@ namespace ThePenguinBank
 
             Customer.Transfer();
 
-            //Run();
-           
-            
-            
+            Run();
         }
-
-
         static void Run()
         {
-            ;   
             int loginReturnResult = LoginAs();
 
             switch (loginReturnResult)
-
             {
                 case 1:
-
-                    CustomerMenu();
-
+                    Customer.CustomerMenu();
                     break;
-
                 case 2:
-
                     Console.WriteLine("Inloggad som admin");
-
                     break;
-
                 case 3:
-
                     Console.WriteLine("Du har gjort dina 3 försök.");
-
                     break;
-
                 default:
-
                     break;
             }
         }
-
-        static int CustomerMenu()
-        {
-            int choice;
-            PrintLogo();
-            do
-            {
-                Console.WriteLine("1. Create Checking Account");
-                Console.WriteLine("2. Create Saving Account");
-                Console.WriteLine("3. Print Accounts");
-                Console.WriteLine("4. Transfer Money");
-                Console.WriteLine("0. Close program");
-
-                while (!int.TryParse(Console.ReadLine(), out choice))
-                {
-                    Console.WriteLine("Invalid input, try again.");
-                }
-
-                switch (choice)
-                {
-                    case 1:
-                        CreateCheckingAccount();
-                        break;
-                    case 2:
-                        CreateSavingAccount();
-                        break;
-                    case 3:
-                        PrintAccounts();
-                        break;
-                    case 4:
-                    {
-                        Customer.Transfer();
-                    }
-                        break;
-                    case 0:
-                        break;
-                    default:
-                        Console.WriteLine("That was not a valid choice.");
-                        break;
-                }
-            } while (choice != 0);
-
-            return choice;
-        }
-
-        static double GetInputNumber()
+        public static double GetInputNumber()
         {
             double userInput;
             while (true)
@@ -128,11 +60,8 @@ namespace ThePenguinBank
                     Console.WriteLine("Try a valid input!");
                 }
             }
-
             return userInput;
         }
-
-
         static int LoginAs()
         {
             Console.WriteLine();
@@ -152,7 +81,6 @@ namespace ThePenguinBank
                     if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
                     {
                         return 1;
-
                     }
                     else if (userCustomerIDInput == 511 && userPasswordInput == 00000)
                     {
@@ -168,77 +96,6 @@ namespace ThePenguinBank
 
             return 3;
         }
-
-        static void CreateCheckingAccount()
-        {
-            Console.WriteLine("Thank you for opening a new checking account at Penguin Bank");
-
-            Console.Write("Please write your customer ID number: ");
-            double customerID = GetInputNumber();
-
-            Random numberGenerator = new Random();
-            int accountID = numberGenerator.Next(40000000, 49999999);
-
-            Console.Write("Please add balance to the account: ");
-            double balance = GetInputNumber();
-
-            Checking newAccount = new Checking(customerID, accountID, balance);
-
-            Console.WriteLine("Would you like to see a confirmation of your new account details, please press 1");
-            Console.Write("Or to exit menu, please press 0: ");
-            double userChoice = GetInputNumber();
-
-            if (userChoice == 1)
-            {
-                Console.WriteLine("Your new checking account:\n" + "Customer ID: " + newAccount.CustomerID +
-                                  "\nAccount number: " + newAccount.AccountID +
-                                  "\nCurrent balance: " + newAccount.Balance);
-                Console.WriteLine("Press any key + enter to exit");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Thank you for choosing Penguin Bank services!");
-            }
-
-            Customer.AccountList.Add(new Checking(customerID, accountID, balance));
-        }
-
-        static void CreateSavingAccount()
-        {
-            Console.WriteLine("Thank you for opening a new saving account at Penguin Bank");
-
-            Console.Write("Please write your customer ID number: ");
-            double customerID = GetInputNumber();
-
-            Random numberGenerator = new Random();
-            int accountID = numberGenerator.Next(90000000, 99999999);
-
-            Console.Write("Please add balance to the account: ");
-            double balance = GetInputNumber();
-
-
-            Saving newAccount = new Saving(customerID, accountID, balance);
-
-            Console.WriteLine("Would you like to see a confirmation of your new account details, please press 1");
-            Console.Write("Or to exit menu, please press 0: ");
-            double userChoice = GetInputNumber();
-            if (userChoice == 1)
-            {
-                Console.WriteLine("Your new checking account:\n" + "Customer ID: " + newAccount.CustomerID +
-                                  "\nAccount number: " + newAccount.AccountID +
-                                  "\nCurrent balance: " + newAccount.Balance);
-                Console.WriteLine("Press any key + enter to exit");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Thank you for choosing Penguin Bank services!");
-            }
-
-            Customer.AccountList.Add(new Saving(customerID, accountID, balance));
-        }
-
         public static void PrintAccounts()
         {
             foreach (var accounts in Customer.AccountList)
@@ -262,8 +119,6 @@ namespace ThePenguinBank
                 }
             }
         }
-
-        
         public static void PrintLogo()
         {
             string logoType = @"    

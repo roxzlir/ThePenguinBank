@@ -1,15 +1,12 @@
 
 namespace ThePenguinBank
 {
-    internal class Customer : Account
+    public class Customer : Account
     {
-        public static List<Account> AccountList = new();
-
-        
-
+        public static readonly List<Account> AccountList = new();
         public enum AccountTyp
         {
-            cheking,
+            checking,
             saving
         }
         public string Name { get; set; }
@@ -22,57 +19,90 @@ namespace ThePenguinBank
             Name = name;
             Password = password;
         }
-        public void Deposit(double amount, AccountTyp accountType, Checking cheking, Saving saving)
+        
+       public static int CustomerMenu()
         {
-            double chekingBalance = cheking.Balance;
-            double savingBalance = saving.Balance;
+            int choice;
+            Program.PrintLogo();
+            do
+            {
+                Console.WriteLine("1. Create Checking Account");
+                Console.WriteLine("2. Create Saving Account");
+                Console.WriteLine("3. Print Accounts");
+                Console.WriteLine("4. Transfer Money");
+                Console.WriteLine("5. Get loan");
+                Console.WriteLine("6. deposit");
+                Console.WriteLine("7. Exchange currency");
 
-            if (accountType == AccountTyp.cheking)
+                Console.WriteLine("0. Close program");
+
+                while (!int.TryParse(Console.ReadLine(), out choice))
+                {
+                    Console.WriteLine("Invalid input, try again.");
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        Checking.CreateCheckingAccount();
+                        break;
+                    case 2:
+                        Saving.CreateSavingAccount();
+                        break;
+                    case 3:
+                        Program.PrintAccounts();
+                        break;
+                    case 4:
+                        Customer.Transfer();
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        Customer.Deposit();
+                        break;
+                    case 7:
+                        Admin.SEKToUSD();
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        Console.WriteLine("That was not a valid choice.");
+                        break;
+                }
+            } while (choice != 0);
+
+            return choice;
+        }
+        public static void Deposit()
+        {
+            while (true)
             {
-                chekingBalance += amount;
-                Console.WriteLine(chekingBalance);
-            }
-            else if (accountType == AccountTyp.saving)
-            {
-                savingBalance += amount;
-                Console.WriteLine(savingBalance);
-            }
-            else
-            {
-                Console.WriteLine("Inviled accountType, enter cheking or saving");
+                Console.WriteLine("What account do you want to deposit to?");
+
+                int i = 1;
+                foreach (var account in AccountList)
+                {
+
+                    Console.WriteLine($"{i++}.{account.AccountID}");
+
+                }
+
+                var toAccount = int.Parse(Console.ReadLine()) - 1;
+
+                Console.WriteLine("How much would you like to transfer?");
+                int amount = int.Parse(Console.ReadLine());
+
+                if (amount <= 0)
+                {
+                    Console.WriteLine("You have to enter a valid number!");
+                }
+
+                AccountList[toAccount].Balance += amount;
+
+                Console.WriteLine($"You have deposited {amount} to {toAccount}");
+                break;
             }
         }
-
-        //public static void AccountLog(AccountTyp accountType, Checking checking, Saving saving)
-        //{
-        //    List<Transaction> transactions = new List<Transaction>();
-        //    if (accountType == AccountTyp.cheking)
-        //    {
-        //        transactions = Customer.checking.Tra
-        //    }
-
-        //    else if (accountType == AccountTyp.saving)
-        //    {
-        //        transactions = saving.Tra
-        //    }
-
-        //    else
-        //    {
-        //        Console.WriteLine("Inlalid accountType, enter Cheking or saving");
-        //        return;
-        //    }
-        //    Console.WriteLine("AccountTyp log in " + accountType);
-        //    foreach (Transaction transaction in transactions)
-        //    {
-        //        Console.WriteLine(transaction.Date);
-        //    }
-        //}
-
-        //Add a method in Customer class: Deposit()
-
-        //A   method that adds a value to property Balance in Checking and Saving.
-
-
         public static void Transfer()
         {
             while (true)
@@ -80,12 +110,10 @@ namespace ThePenguinBank
                 Console.WriteLine("What account do you want to transfer from?");
 
                 int i = 1;
-                    foreach (var account in AccountList)
-                    {
-                        
-                        Console.WriteLine($"{i++}.{account.AccountID}");
-                        
-                    }               
+                foreach (var account in AccountList)
+                {
+                    Console.WriteLine($"{i++}.{account.AccountID}");
+                }
 
                 var fromAccount = int.Parse(Console.ReadLine()) - 1;
 
@@ -93,13 +121,10 @@ namespace ThePenguinBank
 
                 foreach (var account in AccountList)
                 {
-                    
                     Console.WriteLine($"{i++}.{account.AccountID}");
-                    
                 }
 
                 var toAccount = int.Parse(Console.ReadLine()) - 1;
-
 
                 Console.WriteLine("How much would you like to transfer?");
                 int amount = int.Parse(Console.ReadLine());
@@ -113,11 +138,9 @@ namespace ThePenguinBank
                 AccountList[fromAccount].Balance -= amount;
                 AccountList[toAccount].Balance += amount;
 
-                Console.WriteLine("$" + amount + " transferred from " + AccountList[fromAccount].CustomerID + " to " + 
-                    AccountList[toAccount].CustomerID);
+                Console.WriteLine("$" + amount + " transferred from " + AccountList[fromAccount].CustomerID + " to " +
+                                  AccountList[toAccount].CustomerID);
                 break;
-
-
             }
         }
     }
