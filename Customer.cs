@@ -4,11 +4,7 @@ namespace ThePenguinBank
     public class Customer : Account
     {
         public static readonly List<Account> AccountList = new();
-        public enum AccountTyp
-        {
-            checking,
-            saving
-        }
+
         public string Name { get; set; }
         public double Password { get; set; }
 
@@ -24,6 +20,7 @@ namespace ThePenguinBank
         {
             int choice;
             Program.PrintLogo();
+            Console.WriteLine("You are now logged in as a Penguin customer!\n");
             do
             {
                 Console.WriteLine("1. Create Checking Account");

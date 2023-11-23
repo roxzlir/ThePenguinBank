@@ -1,3 +1,5 @@
+using System.Timers;
+
 namespace ThePenguinBank;
 
 internal class Admin
@@ -93,13 +95,14 @@ internal class Admin
     public static void AdminMenu()
     {
         Program.PrintLogo();
-
-        Console.WriteLine("You are now logged in as Admin");
-        Console.WriteLine();
+        
+        Console.WriteLine("You are now logged in as Admin\n");
+   
         do
         {
             Console.WriteLine("1. Create New Customer");
             Console.WriteLine("2. Set Currency Rate");
+            Console.WriteLine("3. Display Next Transaction Time (VARNING, when displayed the time will continue until reboot program)");
             Console.WriteLine("0. Log out");
             double choice = Program.GetInputNumber();
             switch (choice)
@@ -110,6 +113,9 @@ internal class Admin
                 case 2:
                     SetCurrencyRate();
                     break;
+                case 3:
+                    RunTransactionTimerInBackground();
+                    break;
                 case 0:
                     Program.LoginAs();
                     break;
@@ -118,6 +124,22 @@ internal class Admin
                     break;
             }
         } while (true);
+    }
+    public static void RunTransactionTimerInBackground()
+    {
+        Console.WriteLine("Await next transaction time... Perfect time for a quick coffee run ;D");
+        Console.WriteLine("While you wait, remember to press a key when you want to go back to menu!");
+
+        var aTimer = new System.Timers.Timer(300000);
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+            Console.ReadLine();
+            static void OnTimedEvent(Object source, ElapsedEventArgs e)
+            {
+                Console.WriteLine("The last transaction was comfirmed at: " + e.SignalTime);
+                Console.WriteLine("\nNEXT TRANSACTION WILL BE IN 5 MINUTES\n");
+            }
     }
 
 }
