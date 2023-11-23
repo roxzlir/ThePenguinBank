@@ -15,14 +15,14 @@ namespace ThePenguinBank
 
         static void Main()
         {
-            
-            //Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
-            Customer customer1 = new Customer(9907139100, 400002, 12333, "Theres", 124);
-            //logInList.Add(customer);
-            logInList.Add(customer1);
-            Admin.CreateNewCustomer();
 
-            CustomerMenu();
+            Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
+            Customer customer1 = new Customer(9907139100, 400002, 12333, "Theres", 124);
+            logInList.Add(customer);
+            logInList.Add(customer1);
+            
+
+            
             Run();
            
             Console.WriteLine("Hello, World!");
@@ -40,7 +40,7 @@ namespace ThePenguinBank
             {
                 case 1:
 
-                    Console.WriteLine("Inloggad som en customer");
+                    CustomerMenu();
 
                     break;
 
@@ -65,7 +65,7 @@ namespace ThePenguinBank
         static int CustomerMenu()
         {
             int choice;
-
+            PrintLogo();
             do
             {
                 Console.WriteLine("1. Create Checking Account");
