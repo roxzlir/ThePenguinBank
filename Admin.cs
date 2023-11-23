@@ -1,17 +1,9 @@
 namespace ThePenguinBank;
 
-internal class Admin : Account
+internal class Admin
 {
-    public Admin(double customerID, int accountID, string newCustomer, string userName) : base(customerID, accountID)
-    {
-        NewCustomer = newCustomer;
-        UserName = userName;
-    }
-
-    public string NewCustomer { get; set; }
-    public string UserName { get; set; }
-
-    public static double GetInputNumber()
+    
+    public static double GetInputNumber() 
     {
         double userInput;
         while (true)
@@ -28,7 +20,9 @@ internal class Admin : Account
         }
         return userInput;
     }
-    public Customer CreateNewCustomer()
+
+
+    public static Customer CreateNewCustomer()
     {
         Console.Write("To add a new customer, please enter a new customer ID: ");
         double customerID = GetInputNumber();
@@ -37,12 +31,11 @@ internal class Admin : Account
         Console.WriteLine($"A checking account have automaticlly been created to {customerID}, accountnumber: {accountID}");
         Console.Write("Please enter the new customer's name: ");
         string name = Console.ReadLine();
-        Console.Write($"Please enter {name}'s securitynumber: ");
-        double securityNumber = GetInputNumber();
-        int maxAttempds = 3;
-        Console.Write("Please add a usernamn for this customer: ");
-        string userNameCustomer = Console.ReadLine();
 
+        int balance = 0;
+
+        Console.Write("Please enter a password for this customer: ");
+        double password = GetInputNumber();
 
         Console.WriteLine("A new customer is now created, please press 1 and enter if you want a overview of the complete customer data. To exit this menu, press 0");
         Console.Write("Enter choice: ");
@@ -51,14 +44,16 @@ internal class Admin : Account
         if (menuChoice == 1)
         {
             Console.WriteLine($"New customer\nCustomer ID: {customerID}\nChecking accountnumber: {accountID}\nCustomer name: {name}" +
-                $"\nCustomer securitynumber: {securityNumber}\nCustomer username: {userNameCustomer}");
+                $"\nCustomer password: {password}");
         }
         else if (menuChoice == 0)
         {
             Console.WriteLine("Closing menu.");
         }
 
-        Customer createdCustomer = new Customer(customerID, accountID, name, securityNumber, maxAttempds, userNameCustomer);
+        
+        Customer createdCustomer = new Customer(customerID, accountID, balance, name, password);
+        Program.logInList.Add(createdCustomer);
         return createdCustomer;
     }
     static void SEKToUSD()
@@ -69,5 +64,43 @@ internal class Admin : Account
         decimal USD = SEK / 10.4275286757M;
         Console.WriteLine(SEK + " SEK converts to " + Math.Round(USD) + " USD.");
     }
+    static void AdminMenu()
+    {
+        Program.PrintLogo();
+        
+
+        do
+        {
+            Console.WriteLine("1. Create New Customer");
+            Console.WriteLine("2. Create Saving Account");
+            Console.WriteLine("3. Print Accounts");
+            Console.WriteLine("4. Transfer money between your accounts");
+            Console.WriteLine("0. Close program");
+            double choice = GetInputNumber();
+            switch (choice)
+            {
+                case 1:
+                    CreateNewCustomer();
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    {
+                        
+                    }
+                    break;
+                case 0:
+                    break;
+                default:
+                    Console.WriteLine("That was not a valid choice.");
+                    break;
+            }
+        } while (true);
+    }
 
 }
+

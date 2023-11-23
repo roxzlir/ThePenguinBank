@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 
-namespace ThePenguinBank
+﻿namespace ThePenguinBank
 {
-    internal class Customer:Account
-     {
-        private static object checking;
+    internal class Customer : Account
+    {
+            private static object checking;
 
         public enum AccountTyp
         {
@@ -17,15 +11,14 @@ namespace ThePenguinBank
             saving
         }
         public string Name { get; set; }
-        public double SecurityNumber { get; set; }
-        public int MaxAttempd { get; set; }
-        public string UserNameCustomer { get; set; } 
-        public Customer(double customerID, int accountID, string name, double securityNumber, int maxAttempds, string userNameCustomer) :base(customerID,accountID)
+        public double Password { get; set; }  
+
+        public Customer(double customerID, int accountID, double balance, string name, double password) : base(
+            customerID, accountID, balance)
+
         {
             Name = name;
-            SecurityNumber = securityNumber;
-            MaxAttempd = maxAttempds;
-            UserNameCustomer = userNameCustomer;
+            Password = password;
         }
         public void Deposit(double amount, AccountTyp accountType, Checking cheking, Saving saving)
         {
