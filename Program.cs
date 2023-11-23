@@ -1,5 +1,7 @@
-using System.Runtime.CompilerServices;
-using Pastel;
+
+﻿using System.Runtime.CompilerServices;
+
+﻿using Pastel;
 using System.Drawing;
 
 
@@ -7,29 +9,36 @@ namespace ThePenguinBank
 {
     internal class Program
     {
-        public static List<Account> AccountList = new();
+        
         public static List<Customer> logInList = new();
 
 
         static void Main()
         {
-            PrintLogo();
+
             Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
             Customer customer1 = new Customer(9907139100, 400002, 12333, "Theres", 124);
             logInList.Add(customer);
             logInList.Add(customer1);
+            Checking acc1 = new Checking(111111, 11111, 100);
+            Checking acc2 = new Checking(222222, 33333, 100);
+            Checking acc3 = new Checking(333333, 55555, 100);
+            Customer.AccountList.Add(acc1);
+            Customer.AccountList.Add(acc2);
+            Customer.AccountList.Add(acc3);
 
+            Customer.Transfer();
 
-            Run();
-
-            Console.WriteLine("Hello, World!");
+            //Run();
+           
+            
+            
         }
 
 
         static void Run()
-
         {
-            ;
+            ;   
             int loginReturnResult = LoginAs();
 
             switch (loginReturnResult)
@@ -68,7 +77,7 @@ namespace ThePenguinBank
                 Console.WriteLine("1. Create Checking Account");
                 Console.WriteLine("2. Create Saving Account");
                 Console.WriteLine("3. Print Accounts");
-                Console.WriteLine("4. Transfer money between your accounts");
+                Console.WriteLine("4. Transfer Money");
                 Console.WriteLine("0. Close program");
 
                 while (!int.TryParse(Console.ReadLine(), out choice))
@@ -89,7 +98,7 @@ namespace ThePenguinBank
                         break;
                     case 4:
                     {
-                        TransferInternal();
+                        Customer.Transfer();
                     }
                         break;
                     case 0:
@@ -124,35 +133,37 @@ namespace ThePenguinBank
         }
 
 
-        private static int LoginAs()
+        static int LoginAs()
         {
             Console.WriteLine();
-            var attempts = 0;
-            const int maxAttempts = 3;
+            int attempts = 0;
+            int maxAttempts = 3;
 
             while (attempts < maxAttempts)
             {
                 Console.Write("Please enter customer ID: ");
-
-                var userCustomerIdInput = GetInputNumber();
-                Console.Write($"Please enter password for ID {userCustomerIdInput}: ");
-                var userPasswordInput = GetInputNumber();
+                
+                double userCustomerIDInput = GetInputNumber();
+                Console.Write($"Please enter password for ID {userCustomerIDInput}: ");
+                double userPasswordInput = GetInputNumber();
 
                 foreach (var customer in logInList)
                 {
-                    if (userCustomerIdInput.Equals(511) && userPasswordInput.Equals(00000))
+                    if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
+                    {
+                        return 1;
+
+                    }
+                    else if (userCustomerIDInput == 511 && userPasswordInput == 00000)
                     {
                         return 2;
                     }
-
-                    if (customer.CustomerID.Equals(userCustomerIdInput) &&
-                        customer.Password.Equals(userCustomerIdInput))
+                    else
                     {
-                        return 1;
+                        Console.WriteLine("You need to enter a valid log in.");
                     }
+
                 }
-                Console.WriteLine("You need to enter a valid log in.");
-                attempts++;
             }
 
             return 3;
@@ -168,6 +179,7 @@ namespace ThePenguinBank
             Random numberGenerator = new Random();
             int accountID = numberGenerator.Next(40000000, 49999999);
 
+            Console.Write("Please add balance to the account: ");
             double balance = GetInputNumber();
 
             Checking newAccount = new Checking(customerID, accountID, balance);
@@ -189,7 +201,7 @@ namespace ThePenguinBank
                 Console.WriteLine("Thank you for choosing Penguin Bank services!");
             }
 
-            AccountList.Add(new Checking(customerID, accountID, balance));
+            Customer.AccountList.Add(new Checking(customerID, accountID, balance));
         }
 
         static void CreateSavingAccount()
@@ -202,10 +214,11 @@ namespace ThePenguinBank
             Random numberGenerator = new Random();
             int accountID = numberGenerator.Next(90000000, 99999999);
 
-            double availableBalance = 0;
+            Console.Write("Please add balance to the account: ");
+            double balance = GetInputNumber();
 
 
-            Saving newAccount = new Saving(customerID, accountID, availableBalance);
+            Saving newAccount = new Saving(customerID, accountID, balance);
 
             Console.WriteLine("Would you like to see a confirmation of your new account details, please press 1");
             Console.Write("Or to exit menu, please press 0: ");
@@ -223,12 +236,12 @@ namespace ThePenguinBank
                 Console.WriteLine("Thank you for choosing Penguin Bank services!");
             }
 
-            AccountList.Add(new Saving(customerID, accountID, availableBalance));
+            Customer.AccountList.Add(new Saving(customerID, accountID, balance));
         }
 
         public static void PrintAccounts()
         {
-            foreach (var accounts in AccountList)
+            foreach (var accounts in Customer.AccountList)
             {
                 Console.WriteLine("These are your accounts");
                 {
@@ -236,56 +249,21 @@ namespace ThePenguinBank
                     {
                         Console.WriteLine(
                             $"Type of account: Checking Account \nCustomer ID: {checkingAccount.CustomerID}\n" +
-                            $"Account ID: {checkingAccount.AccountID}\nBalance: {checkingAccount.Balance}");
+                            $"Account ID: {checkingAccount.AccountID}\nBalance: {checkingAccount.Balance}" +
+                            $"\n--------------------------------------------------------------------------\n");
                     }
                     else if (accounts is Saving savingAccount)
                     {
                         Console.WriteLine(
                             $"Type of account: Savings Account \nCustomer ID: {savingAccount.CustomerID}\n" +
-                            $"Account ID: {savingAccount.AccountID}\nBalance: {savingAccount.Balance}");
+                            $"Account ID: {savingAccount.AccountID}\nBalance: {savingAccount.Balance}" +
+                            $"\n--------------------------------------------------------------------------\n");
                     }
                 }
             }
         }
 
-        public static void TransferInternal()
-        {
-            while (true)
-            {
-                Console.WriteLine("What account do you want to transfer from?");
-
-                for (var i = 0; i < AccountList.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {AccountList[i]}");
-                }
-
-                var fromAccount = int.Parse(Console.ReadLine()) - 1;
-
-                Console.WriteLine("What account do you want to transfer to?");
-
-                for (var i = 0; i < AccountList.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {AccountList[i]}");
-                }
-
-                var toAccount = int.Parse(Console.ReadLine()) - 1;
-
-
-                Console.WriteLine("How much would you like to transfer?");
-                int amount = int.Parse(Console.ReadLine());
-
-                if (amount > 0 && fromAccount <= 0 && amount <= AccountList[fromAccount].Balance)
-                {
-                    double newBalance = AccountList[fromAccount].Balance - amount;
-                    double newReciveBalance = AccountList[toAccount].Balance + amount;
-                }
-                else
-                {
-                    Console.WriteLine("You need to input a valid number!");
-                }
-            }
-        }
-
+        
         public static void PrintLogo()
         {
             string logoType = @"    
