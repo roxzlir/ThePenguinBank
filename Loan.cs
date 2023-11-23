@@ -4,7 +4,7 @@
     {
         public double Amount { get; set; }
         public double InterestRate { get; set; }
-        public bool Approved { get; set; } 
+        public bool Approved { get; set; }
 
         public Loan(double customerID, int accountID, double balance, double amount, double interestRate, bool approved)
             : base(customerID, accountID, balance)
@@ -12,6 +12,43 @@
             Amount = amount;
             InterestRate = interestRate;
             Approved = approved;
+        }
+        public static void ApplyForLoan()
+        {
+            Console.WriteLine("You want to apply for a loan, please enter your Customer ID: ");
+            var requestingCustomerID = Program.GetInputNumber();
+
+            Console.WriteLine("Please enter the request amount: ");
+            double requestedAmount = Program.GetInputNumber();
+            List<Account> applyList = Customer.AccountList.FindAll(x => x.CustomerID == requestingCustomerID);
+
+            Console.WriteLine("Please select an account for the loan: ");
+            int i = 1;
+            foreach (var account in applyList)
+            {
+                Console.WriteLine($"{i++}.{account.AccountID}");
+            }
+
+            var loanAccount = int.Parse(Console.ReadLine()) - 1;
+
+            var loanAmount = Customer.AccountList[loanAccount].Balance * 5;
+            if (loanAmount <= 50000)
+            {
+                Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
+                Console.WriteLine("The interest for a loan up to 50 000 is 10%");
+            }
+            else if (loanAmount > 50000 && loanAmount <= 150000)
+            {
+                Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
+                Console.WriteLine("The interest for a loan between 50 000 - 150 000 is 7%");
+            }
+            else
+            {
+                Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
+                Console.WriteLine("The interest for a loan above 150 000 is 4%");
+            }
+
+            
         }
     }
 }

@@ -30,8 +30,8 @@ namespace ThePenguinBank
                 Console.WriteLine("2. Create Saving Account");
                 Console.WriteLine("3. Print Accounts");
                 Console.WriteLine("4. Transfer Money");
-                Console.WriteLine("5. Get loan");
-                Console.WriteLine("6. deposit");
+                Console.WriteLine("5. Apply for loan");
+                Console.WriteLine("6. Deposit");
                 Console.WriteLine("7. Exchange currency");
 
                 Console.WriteLine("0. Close program");
@@ -56,6 +56,7 @@ namespace ThePenguinBank
                         Customer.Transfer();
                         break;
                     case 5:
+                        Loan.ApplyForLoan();
                         break;
                     case 6:
                         Customer.Deposit();
