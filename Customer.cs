@@ -98,7 +98,7 @@ namespace ThePenguinBank
 
                 AccountList[toAccount].Balance += amount;
 
-                Console.WriteLine($"You have deposited {amount} to {AccountList[toAccount]}");
+                Console.WriteLine($"You have deposited {amount} to {AccountList[toAccount].AccountID}");
                 break;
             }
             Console.WriteLine();
