@@ -1,9 +1,12 @@
 
+using System.Security.Principal;
+
 namespace ThePenguinBank
 {
     public class Customer : Account
     {
         public static readonly List<Account> AccountList = new();
+        public static readonly List<string> TransactionsList = new();
 
         public string Name { get; set; }
         public double Password { get; set; }
@@ -30,6 +33,7 @@ namespace ThePenguinBank
                 Console.WriteLine("5. Apply for loan");
                 Console.WriteLine("6. Deposit");
                 Console.WriteLine("7. Exchange currency");
+                Console.WriteLine("8. Print Transactions");
 
                 Console.WriteLine("0. Log out");
 
@@ -60,6 +64,9 @@ namespace ThePenguinBank
                         break;
                     case 7:
                         Admin.SEKToUSD();
+                        break;
+                    case 8:
+                        PrintTransactions();
                         break;
                     case 0:
                         Program.LoginAs();
@@ -138,11 +145,24 @@ namespace ThePenguinBank
                 AccountList[fromAccount].Balance -= amount;
                 AccountList[toAccount].Balance += amount;
 
-                Console.WriteLine("$" + amount + " transferred from " + AccountList[fromAccount].CustomerID + " to " +
-                                  AccountList[toAccount].CustomerID);
+                Console.WriteLine(amount + " transferred from " + AccountList[fromAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID} to " +
+                                  AccountList[toAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID}");
+                
+                
+                TransactionsList.Add((("$" + amount + " transferred from " + AccountList[fromAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID} to " +
+                                  AccountList[toAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID}")).ToString());
+                     
                 break;
             }
+            
             Console.WriteLine();
+        }
+        public static void PrintTransactions()
+        {
+            foreach (var transaction in TransactionsList)
+            {
+                Console.WriteLine($"--------------------------\n{transaction}\n--------------------------\n");
+            }
         }
     }
 }
