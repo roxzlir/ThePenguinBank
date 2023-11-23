@@ -1,5 +1,9 @@
+
+﻿using System.Runtime.CompilerServices;
+
 ﻿using Pastel;
 using System.Drawing;
+
 
 namespace ThePenguinBank
 {
@@ -11,18 +15,24 @@ namespace ThePenguinBank
 
         static void Main()
         {
-            Admin admin = new Admin();
-            Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
+            
+            //Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
             Customer customer1 = new Customer(9907139100, 400002, 12333, "Theres", 124);
-            LoginAs();
+            //logInList.Add(customer);
+            logInList.Add(customer1);
+            Admin.CreateNewCustomer();
+
+            CustomerMenu();
             Run();
-            Menu();
+           
             Console.WriteLine("Hello, World!");
+            
         }
 
 
         static void Run()
         {
+            ;   
             int loginReturnResult = LoginAs();
 
             switch (loginReturnResult)
@@ -52,7 +62,7 @@ namespace ThePenguinBank
             }
         }
 
-        static int Menu()
+        static int CustomerMenu()
         {
             int choice;
 
@@ -125,7 +135,10 @@ namespace ThePenguinBank
 
             while (attempts < maxAttempts)
             {
+                Console.Write("Please enter customer ID: ");
+                
                 double userCustomerIDInput = GetInputNumber();
+                Console.Write($"Please enter password for ID {userCustomerIDInput}: ");
                 double userPasswordInput = GetInputNumber();
 
                 foreach (var customer in logInList)
@@ -133,6 +146,7 @@ namespace ThePenguinBank
                     if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
                     {
                         return 1;
+
                     }
                     else if (userCustomerIDInput == 511 && userPasswordInput == 00000)
                     {
@@ -140,8 +154,9 @@ namespace ThePenguinBank
                     }
                     else
                     {
-                        Console.WriteLine("You need to enter a valid login");
+                        Console.WriteLine("You need to enter a valid log in.");
                     }
+
                 }
             }
 
