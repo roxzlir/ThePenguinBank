@@ -1,18 +1,8 @@
 ﻿namespace ThePenguinBank
 {
-    internal class Loan : Account
+    internal class Loan
     {
-        public double Amount { get; set; }
-        public double InterestRate { get; set; }
-        public bool Approved { get; set; }
 
-        public Loan(double customerID, int accountID, double balance, double amount, double interestRate, bool approved)
-            : base(customerID, accountID, balance)
-        {
-            Amount = amount;
-            InterestRate = interestRate;
-            Approved = approved;
-        }
         public static void ApplyForLoan()
         {
             Console.WriteLine("You want to apply for a loan, please enter your Customer ID: ");
