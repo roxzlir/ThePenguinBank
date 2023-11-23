@@ -7,26 +7,27 @@ namespace ThePenguinBank
 {
     public class Program
     {
-        public static readonly List<Customer> logInList = new();
+
         static void Main()
         {
-            Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
-            Customer customer1 = new Customer(9907139100, 400002, 12333, "Theres", 124);
+            Run();
+        }
+        public static readonly List<Customer> logInList = new();
+        static void Run()
+        {
+            Customer customer = new Customer(8808227832, 49799291, 5000, "Emil Nordin", 123);
+            Customer customer1 = new Customer(9907139100, 45493109, 32000, "Theres Sundberg", 321);
             logInList.Add(customer);
             logInList.Add(customer1);
-            Checking acc1 = new Checking(111111, 11111, 100);
-            Checking acc2 = new Checking(222222, 33333, 100);
-            Checking acc3 = new Checking(333333, 55555, 100);
+            Checking acc1 = new Checking(8808227832, 44500172, 10000);
+            Saving acc2 = new Saving(8808227832, 90231141, 56322);
+            Checking acc3 = new Checking(9907139100, 45470221, 32000);
+            Saving acc4 = new Saving(8808227832, 99222141, 71500);
             Customer.AccountList.Add(acc1);
             Customer.AccountList.Add(acc2);
             Customer.AccountList.Add(acc3);
+            Customer.AccountList.Add(acc4);
 
-            Customer.Transfer();
-
-            Run();
-        }
-        static void Run()
-        {
             int loginReturnResult = LoginAs();
 
             switch (loginReturnResult)
@@ -35,7 +36,7 @@ namespace ThePenguinBank
                     Customer.CustomerMenu();
                     break;
                 case 2:
-                    Console.WriteLine("Inloggad som admin");
+                    Admin.AdminMenu();
                     break;
                 case 3:
                     Console.WriteLine("Du har gjort dina 3 försök.");
@@ -62,7 +63,7 @@ namespace ThePenguinBank
             }
             return userInput;
         }
-        static int LoginAs()
+        public static int LoginAs()
         {
             Console.WriteLine();
             int attempts = 0;
@@ -82,7 +83,7 @@ namespace ThePenguinBank
                     {
                         return 1;
                     }
-                    else if (userCustomerIDInput == 511 && userPasswordInput == 00000)
+                    else if (userCustomerIDInput == 11111 && userPasswordInput == 00000)
                     {
                         return 2;
                     }
@@ -98,9 +99,10 @@ namespace ThePenguinBank
         }
         public static void PrintAccounts()
         {
+            Console.WriteLine("These are your accounts");
             foreach (var accounts in Customer.AccountList)
             {
-                Console.WriteLine("These are your accounts");
+                
                 {
                     if (accounts is Checking checkingAccount)
                     {
@@ -118,6 +120,7 @@ namespace ThePenguinBank
                     }
                 }
             }
+            Console.WriteLine();
         }
         public static void PrintLogo()
         {

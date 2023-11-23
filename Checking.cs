@@ -40,6 +40,7 @@
             }
 
             Customer.AccountList.Add(new Checking(customerID, accountID, balance));
+            Console.WriteLine();
         }
     }
 }

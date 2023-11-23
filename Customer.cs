@@ -4,11 +4,7 @@ namespace ThePenguinBank
     public class Customer : Account
     {
         public static readonly List<Account> AccountList = new();
-        public enum AccountTyp
-        {
-            checking,
-            saving
-        }
+
         public string Name { get; set; }
         public double Password { get; set; }
 
@@ -24,17 +20,18 @@ namespace ThePenguinBank
         {
             int choice;
             Program.PrintLogo();
+            Console.WriteLine("You are now logged in as a Penguin customer!\n");
             do
             {
                 Console.WriteLine("1. Create Checking Account");
                 Console.WriteLine("2. Create Saving Account");
                 Console.WriteLine("3. Print Accounts");
                 Console.WriteLine("4. Transfer Money");
-                Console.WriteLine("5. Get loan");
-                Console.WriteLine("6. deposit");
+                Console.WriteLine("5. Apply for loan");
+                Console.WriteLine("6. Deposit");
                 Console.WriteLine("7. Exchange currency");
 
-                Console.WriteLine("0. Close program");
+                Console.WriteLine("0. Log out");
 
                 while (!int.TryParse(Console.ReadLine(), out choice))
                 {
@@ -56,6 +53,7 @@ namespace ThePenguinBank
                         Customer.Transfer();
                         break;
                     case 5:
+                        Loan.ApplyForLoan();
                         break;
                     case 6:
                         Customer.Deposit();
@@ -64,6 +62,7 @@ namespace ThePenguinBank
                         Admin.SEKToUSD();
                         break;
                     case 0:
+                        Program.LoginAs();
                         break;
                     default:
                         Console.WriteLine("That was not a valid choice.");
@@ -89,7 +88,7 @@ namespace ThePenguinBank
 
                 var toAccount = int.Parse(Console.ReadLine()) - 1;
 
-                Console.WriteLine("How much would you like to transfer?");
+                Console.WriteLine("How much would you like to deposit?");
                 int amount = int.Parse(Console.ReadLine());
 
                 if (amount <= 0)
@@ -99,9 +98,10 @@ namespace ThePenguinBank
 
                 AccountList[toAccount].Balance += amount;
 
-                Console.WriteLine($"You have deposited {amount} to {toAccount}");
+                Console.WriteLine($"You have deposited {amount} to {AccountList[toAccount]}");
                 break;
             }
+            Console.WriteLine();
         }
         public static void Transfer()
         {
@@ -112,16 +112,16 @@ namespace ThePenguinBank
                 int i = 1;
                 foreach (var account in AccountList)
                 {
-                    Console.WriteLine($"{i++}.{account.AccountID}");
+                    Console.WriteLine($"{i++}. Account: {account.AccountID} - Balance: {account.Balance}");
                 }
 
                 var fromAccount = int.Parse(Console.ReadLine()) - 1;
 
                 Console.WriteLine("What account do you want to transfer to?");
-
+                int y = 1;
                 foreach (var account in AccountList)
                 {
-                    Console.WriteLine($"{i++}.{account.AccountID}");
+                    Console.WriteLine($"{y++}. Account: {account.AccountID} - Balance: {account.Balance}");
                 }
 
                 var toAccount = int.Parse(Console.ReadLine()) - 1;
@@ -142,6 +142,7 @@ namespace ThePenguinBank
                                   AccountList[toAccount].CustomerID);
                 break;
             }
+            Console.WriteLine();
         }
     }
 }
