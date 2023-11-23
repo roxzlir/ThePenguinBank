@@ -35,7 +35,7 @@ namespace ThePenguinBank
             {
                 case 1:
 
-                    Console.WriteLine("Inloggad som en customer");
+                    CustomerMenu();
 
                     break;
 

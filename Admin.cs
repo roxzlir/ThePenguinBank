@@ -64,6 +64,41 @@ internal class Admin
         decimal USD = SEK / 10.4275286757M;
         Console.WriteLine(SEK + " SEK converts to " + Math.Round(USD) + " USD.");
     }
+    static void AdminMenu()
+    {
+        double choice = GetInputNumber();
+
+        do
+        {
+            Console.WriteLine("1. Create New Customer");
+            Console.WriteLine("2. Create Saving Account");
+            Console.WriteLine("3. Print Accounts");
+            Console.WriteLine("4. Transfer money between your accounts");
+            Console.WriteLine("0. Close program");
+            switch (choice)
+            {
+                case 1:
+                    CreateNewCustomer();
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    {
+                        
+                    }
+                    break;
+                case 0:
+                    break;
+                default:
+                    Console.WriteLine("That was not a valid choice.");
+                    break;
+            }
+        } while (choice != 0);
+    }
 
 }
 
