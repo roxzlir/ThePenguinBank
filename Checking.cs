@@ -1,4 +1,6 @@
+
 ﻿namespace ThePenguinBank
+
 {
     internal class Checking : Account
     {
