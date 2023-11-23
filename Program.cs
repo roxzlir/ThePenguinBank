@@ -1,7 +1,5 @@
-
-﻿using System.Runtime.CompilerServices;
-
-﻿using Pastel;
+using System.Runtime.CompilerServices;
+using Pastel;
 using System.Drawing;
 
 
@@ -15,24 +13,22 @@ namespace ThePenguinBank
 
         static void Main()
         {
-
+            PrintLogo();
             Customer customer = new Customer(8808227832, 4000001, 123333, "Emil", 123);
             Customer customer1 = new Customer(9907139100, 400002, 12333, "Theres", 124);
             logInList.Add(customer);
             logInList.Add(customer1);
-            
 
-            
+
             Run();
-           
+
             Console.WriteLine("Hello, World!");
-            
         }
 
 
         static void Run()
         {
-            ;   
+            ;
             int loginReturnResult = LoginAs();
 
             switch (loginReturnResult)
@@ -127,37 +123,35 @@ namespace ThePenguinBank
         }
 
 
-        static int LoginAs()
+        private static int LoginAs()
         {
             Console.WriteLine();
-            int attempts = 0;
-            int maxAttempts = 3;
+            var attempts = 0;
+            const int maxAttempts = 3;
 
             while (attempts < maxAttempts)
             {
                 Console.Write("Please enter customer ID: ");
-                
-                double userCustomerIDInput = GetInputNumber();
-                Console.Write($"Please enter password for ID {userCustomerIDInput}: ");
-                double userPasswordInput = GetInputNumber();
+
+                var userCustomerIdInput = GetInputNumber();
+                Console.Write($"Please enter password for ID {userCustomerIdInput}: ");
+                var userPasswordInput = GetInputNumber();
 
                 foreach (var customer in logInList)
                 {
-                    if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
-                    {
-                        return 1;
-
-                    }
-                    else if (userCustomerIDInput == 511 && userPasswordInput == 00000)
+                    if (userCustomerIdInput.Equals(511) && userPasswordInput.Equals(00000))
                     {
                         return 2;
                     }
-                    else
-                    {
-                        Console.WriteLine("You need to enter a valid log in.");
-                    }
 
+                    if (customer.CustomerID.Equals(userCustomerIdInput) &&
+                        customer.Password.Equals(userCustomerIdInput))
+                    {
+                        return 1;
+                    }
                 }
+                Console.WriteLine("You need to enter a valid log in.");
+                attempts++;
             }
 
             return 3;
@@ -264,7 +258,7 @@ namespace ThePenguinBank
                     Console.WriteLine($"{i + 1}. {AccountList[i]}");
                 }
 
-                var fromAccount = int.Parse(Console.ReadLine()) - 1; 
+                var fromAccount = int.Parse(Console.ReadLine()) - 1;
 
                 Console.WriteLine("What account do you want to transfer to?");
 
@@ -290,6 +284,7 @@ namespace ThePenguinBank
                 }
             }
         }
+
         public static void PrintLogo()
         {
             string logoType = @"    
