@@ -39,6 +39,7 @@
             }
 
             Customer.AccountList.Add(new Saving(customerID, accountID, balance));
+            Console.WriteLine();
         }
     }
 }

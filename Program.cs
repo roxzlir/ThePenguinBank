@@ -7,11 +7,12 @@ namespace ThePenguinBank
 {
     public class Program
     {
-        public static readonly List<Customer> logInList = new();
+
         static void Main()
         {
             Run();
         }
+        public static readonly List<Customer> logInList = new();
         static void Run()
         {
             Customer customer = new Customer(8808227832, 49799291, 5000, "Emil Nordin", 123);
@@ -35,7 +36,7 @@ namespace ThePenguinBank
                     Customer.CustomerMenu();
                     break;
                 case 2:
-                    Console.WriteLine("Inloggad som admin");
+                    Admin.AdminMenu();
                     break;
                 case 3:
                     Console.WriteLine("Du har gjort dina 3 försök.");
@@ -62,7 +63,7 @@ namespace ThePenguinBank
             }
             return userInput;
         }
-        static int LoginAs()
+        public static int LoginAs()
         {
             Console.WriteLine();
             int attempts = 0;
@@ -82,7 +83,7 @@ namespace ThePenguinBank
                     {
                         return 1;
                     }
-                    else if (userCustomerIDInput == 511 && userPasswordInput == 00000)
+                    else if (userCustomerIDInput == 11111 && userPasswordInput == 00000)
                     {
                         return 2;
                     }
@@ -119,6 +120,7 @@ namespace ThePenguinBank
                     }
                 }
             }
+            Console.WriteLine();
         }
         public static void PrintLogo()
         {

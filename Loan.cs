@@ -36,19 +36,43 @@
             {
                 Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
                 Console.WriteLine("The interest for a loan up to 50 000 is 10%");
+                if (requestedAmount < loanAmount)
+                {
+                    Console.WriteLine("You are approved for this loan!");
+                }
+                else
+                {
+                    Console.WriteLine("You are denied for this loan.");
+                }
             }
             else if (loanAmount > 50000 && loanAmount <= 150000)
             {
                 Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
                 Console.WriteLine("The interest for a loan between 50 000 - 150 000 is 7%");
+                if (requestedAmount < loanAmount)
+                {
+                    Console.WriteLine("You are approved for this loan!");
+                }
+                else
+                {
+                    Console.WriteLine("You are denied for this loan.");
+                }
             }
             else
             {
                 Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
                 Console.WriteLine("The interest for a loan above 150 000 is 4%");
+                if (requestedAmount < loanAmount)
+                {
+                    Console.WriteLine("You are approved for this loan!");
+                }
+                else
+                {
+                    Console.WriteLine("You are denied for this loan.");
+                }
             }
 
-            
+            Console.WriteLine();
         }
     }
 }

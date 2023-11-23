@@ -23,6 +23,7 @@ internal class Admin
             }
         }
         return userInput;
+        Console.WriteLine();
     }
     public static void SetCurrencyRate()
     {
@@ -42,7 +43,7 @@ internal class Admin
                 break;
         }
         Console.WriteLine($"New exchange rate value for USD is: {USD}");
-        
+        Console.WriteLine();
     }
     public static Customer CreateNewCustomer()
     {
@@ -77,6 +78,7 @@ internal class Admin
         Customer createdCustomer = new Customer(customerID, accountID, balance, name, password);
         Program.logInList.Add(createdCustomer);
         return createdCustomer;
+        Console.WriteLine();
     }
 
     public static void SEKToUSD()
@@ -86,17 +88,19 @@ internal class Admin
         
         decimal ExchangeRate = SEK / USD;
         Console.WriteLine(SEK + " SEK converts to " + Math.Round(ExchangeRate) + " USD.");
+        Console.WriteLine();
     }
     public static void AdminMenu()
     {
         Program.PrintLogo();
-        
 
+        Console.WriteLine("You are now logged in as Admin");
+        Console.WriteLine();
         do
         {
             Console.WriteLine("1. Create New Customer");
             Console.WriteLine("2. Set Currency Rate");
-            Console.WriteLine("0. Close program");
+            Console.WriteLine("0. Log out");
             double choice = Program.GetInputNumber();
             switch (choice)
             {
@@ -107,6 +111,7 @@ internal class Admin
                     SetCurrencyRate();
                     break;
                 case 0:
+                    Program.LoginAs();
                     break;
                 default:
                     Console.WriteLine("That was not a valid choice.");
