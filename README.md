@@ -57,6 +57,7 @@ Name - well, your name..
 ##### -> Zia Nourozi
 
 
+![Flowcharts - Page 1](https://github.com/roxzlir/ThePenguinBank/assets/144246665/668db49d-b9d8-47b6-b842-5258c1917afd)
 
 
 
