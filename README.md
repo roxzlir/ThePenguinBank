@@ -1,7 +1,14 @@
 # Bank application.
 ## ThePenguinBank
+#### Thank you for using The Penguin Bank Application
+##### PLEASE NOTE: 
+Since we want the sourcecode to be as easy as possible to read, we have added our logotype in a separate file that adds to your
+local folder, so the FIRST thing we ask you to do is go in to the class called: Methods 
+On the absolute bottom of the page you will find a string datatype: 
+string path = @" HERE you need to add your directory, ex: C:\Users\youruser\source\repos\ThePenguinBank\PenguinLogo.txt";
+Otherwise the logo won't appear.
 
-The first thing you will have to do is login. We have created three pre-made login accounts for you to use. You will be able to add 
+The first thing you will have to do is to login. We have created three pre-made login accounts for you to use. You will be able to add 
 new customer accounts if you use the admin login details. 
 ### Admin user:
 CustomerID = 11111
