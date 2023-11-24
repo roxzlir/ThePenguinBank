@@ -22,7 +22,7 @@ namespace ThePenguinBank
        public static int CustomerMenu()
         {
             int choice;
-            Program.PrintLogo();
+            Methods.PrintLogo();
             Console.WriteLine("You are now logged in as a Penguin customer!\n");
             do
             {
@@ -51,7 +51,7 @@ namespace ThePenguinBank
                         Saving.CreateSavingAccount();
                         break;
                     case 3:
-                        Program.PrintAccounts();
+                        Methods.PrintAccounts();
                         break;
                     case 4:
                         Customer.Transfer();
@@ -69,7 +69,7 @@ namespace ThePenguinBank
                         PrintTransactions();
                         break;
                     case 0:
-                        Program.LoginAs();
+                        Methods.LoginAs();
                         break;
                     default:
                         Console.WriteLine("That was not a valid choice.");
