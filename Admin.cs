@@ -1,14 +1,10 @@
 using System.Timers;
 
 namespace ThePenguinBank;
-
 internal class Admin
 {
-
-    public static decimal USD = 10.49M;
-
-
-    public static decimal GetInputDecimal()
+    private static decimal USD = 10.49M;
+    private static decimal GetInputDecimal()
     {
         decimal userInput;
         while (true)
@@ -25,13 +21,12 @@ internal class Admin
             }
         }
         return userInput;
-        Console.WriteLine();
     }
-    public static void SetCurrencyRate()
+    private static void SetCurrencyRate()
     {
         Console.WriteLine($"Right now your US Dollar exchange rate value is: {USD}");
         Console.Write("To set new exchange rate press 1, to exit press any key: ");
-        double menu = Program.GetInputNumber();
+        double menu = Methods.GetInputNumber();
         switch (menu)
         {
             case 1:
@@ -47,40 +42,40 @@ internal class Admin
         Console.WriteLine($"New exchange rate value for USD is: {USD}");
         Console.WriteLine();
     }
-    public static Customer CreateNewCustomer()
+    private static Customer CreateNewCustomer()
     {
         Console.Write("To add a new customer, please enter a new customer ID: ");
-        double customerID = Program.GetInputNumber();
+        double customerID = Methods.GetInputNumber();
         Random numberGenerator = new Random();
         int accountID = numberGenerator.Next(40000000, 49999999);
-        Console.WriteLine($"A checking account have automaticlly been created to {customerID}, accountnumber: {accountID}");
+        Console.WriteLine($"A checking account have automatically been created to {customerID}, accountnumber: {accountID}");
         Console.Write("Please enter the new customer's name: ");
-        string name = Console.ReadLine();
+        var name = Console.ReadLine();
 
-        int balance = 0;
+        var balance = 0;
 
         Console.Write("Please enter a password for this customer: ");
-        double password = Program.GetInputNumber();
+        double password = Methods.GetInputNumber();
 
         Console.WriteLine("A new customer is now created, please press 1 and enter if you want a overview of the complete customer data. To exit this menu, press 0");
         Console.Write("Enter choice: ");
-        double menuChoice = Program.GetInputNumber();
+        double menuChoice = Methods.GetInputNumber();
 
-        if (menuChoice == 1)
+        switch (menuChoice)
         {
-            Console.WriteLine($"New customer\nCustomer ID: {customerID}\nChecking accountnumber: {accountID}\nCustomer name: {name}" +
-                $"\nCustomer password: {password}");
-        }
-        else if (menuChoice == 0)
-        {
-            Console.WriteLine("Closing menu.");
+            case 1:
+                Console.WriteLine($"New customer\nCustomer ID: {customerID}\nChecking accountnumber: {accountID}\nCustomer name: {name}" +
+                                  $"\nCustomer password: {password}");
+                break;
+            case 0:
+                Console.WriteLine("Closing menu.");
+                break;
         }
 
         
         Customer createdCustomer = new Customer(customerID, accountID, balance, name, password);
-        Program.logInList.Add(createdCustomer);
+        Methods.LogInList.Add(createdCustomer);
         return createdCustomer;
-        Console.WriteLine();
     }
 
     public static void SEKToUSD()
@@ -94,7 +89,7 @@ internal class Admin
     }
     public static void AdminMenu()
     {
-        Program.PrintLogo();
+        Methods.PrintLogo();
         
         Console.WriteLine("You are now logged in as Admin\n");
    
@@ -104,7 +99,7 @@ internal class Admin
             Console.WriteLine("2. Set Currency Rate");
             Console.WriteLine("3. Display Next Transaction Time (VARNING, when displayed the time will continue until reboot program)");
             Console.WriteLine("0. Log out");
-            double choice = Program.GetInputNumber();
+            double choice = Methods.GetInputNumber();
             switch (choice)
             {
                 case 1:
@@ -117,7 +112,7 @@ internal class Admin
                     RunTransactionTimerInBackground();
                     break;
                 case 0:
-                    Program.LoginAs();
+                    Methods.LoginAs();
                     break;
                 default:
                     Console.WriteLine("That was not a valid choice.");
@@ -125,7 +120,8 @@ internal class Admin
             }
         } while (true);
     }
-    public static void RunTransactionTimerInBackground()
+
+    private static void RunTransactionTimerInBackground()
     {
         Console.WriteLine("Await next transaction time... Perfect time for a quick coffee run ;D");
         Console.WriteLine("While you wait, remember to press a key when you want to go back to menu!");
@@ -137,7 +133,7 @@ internal class Admin
             Console.ReadLine();
             static void OnTimedEvent(Object source, ElapsedEventArgs e)
             {
-                Console.WriteLine("The last transaction was comfirmed at: " + e.SignalTime);
+                Console.WriteLine("The last transaction was confirmed at: " + e.SignalTime);
                 Console.WriteLine("\nNEXT TRANSACTION WILL BE IN 5 MINUTES\n");
             }
     }

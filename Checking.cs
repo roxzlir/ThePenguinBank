@@ -12,19 +12,19 @@
             Console.WriteLine("Thank you for opening a new checking account at Penguin Bank");
 
             Console.Write("Please write your customer ID number: ");
-            double customerID = Program.GetInputNumber();
+            double customerID = Methods.GetInputNumber();
 
             Random numberGenerator = new Random();
             int accountID = numberGenerator.Next(40000000, 49999999);
 
             Console.Write("Please add balance to the account: ");
-            double balance = Program.GetInputNumber();
+            double balance = Methods.GetInputNumber();
 
             Checking newAccount = new Checking(customerID, accountID, balance);
 
             Console.WriteLine("Would you like to see a confirmation of your new account details, please press 1");
             Console.Write("Or to exit menu, please press 0: ");
-            double userChoice = Program.GetInputNumber();
+            double userChoice = Methods.GetInputNumber();
 
             if (userChoice == 1)
             {
