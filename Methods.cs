@@ -120,8 +120,8 @@ public class Methods
     public static void PrintLogo()
     {
 
-        string path = @"/Users/tess/Documents/Objektorienterad prog./ThePenguinBank/PenguinLogo.txt";
-            string readText = File.ReadAllText(path);
+        string path = @" HERE you need to add your directory, ex: C:\Users\youruser\source\repos\ThePenguinBank\PenguinLogo.txt";
+        string readText = File.ReadAllText(path);
             Console.WriteLine(readText);
     }
 }
