@@ -4,9 +4,9 @@ using System.Reflection.Metadata.Ecma335;
 
 public class Methods
 {
-    public static List<Customer> LogInList = new();
+    public static List<Customer> LogInList = new(); //We added a static List to add our customer object's in to be able to match them in the login 
 
-    public static void Run()
+    public static void Run() //This is the method that we use as our "main" method, to run the Login and then the actual menu choices
     {
         Console.Clear();
         Methods.PrintLogo();
@@ -21,13 +21,13 @@ public class Methods
         Customer.AccountList.Add(acc1);
         Customer.AccountList.Add(acc2);
         Customer.AccountList.Add(acc3);
-        Customer.AccountList.Add(acc4);
+        Customer.AccountList.Add(acc4);  //All of the above is added to have some data to play with in the app
 
         Console.WriteLine();
         int attempts = 0;
         int maxAttempts = 3;
 
-        while (attempts < maxAttempts)
+        while (attempts < maxAttempts) //While loop with 3 attempts for login
         {
             Console.Write("Please enter customer ID: ");
 
@@ -35,22 +35,21 @@ public class Methods
             Console.Write($"Please enter password for ID {userCustomerIDInput}: ");
             double userPasswordInput = GetInputNumber();
 
-            foreach (var customer in LogInList)
+            foreach (var customer in LogInList) //Here we want the loop to check the static LogInList for every customer in it
             {
                 if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
-                {
-                    Console.Clear();
+                {                               //And if the customerID and customerPassword exists in the list and the user input matches that the if statment will run the   
+                    Console.Clear();           //CustomerMenu method
                     Methods.PrintMenuLogo();
                     Customer.CustomerMenu();
                     break;
                 }
                 else if (userCustomerIDInput == 11111 && userPasswordInput == 00000)
-                {
+                {                             //We hard coded the admin login since there only is 1 admin that are going to be able to login
                     Console.Clear();
                     Methods.PrintMenuLogo();
                     Admin.AdminMenu();
                     break;
-
                 }
                 else
                 {
@@ -58,14 +57,13 @@ public class Methods
                     attempts++;
                     Console.WriteLine($"Login attempts {attempts} of {maxAttempts}.");
                     break;
-                    
                 }
             }
         }
 
     }
 
-    public static double GetInputNumber()
+    public static double GetInputNumber() //Simple but effective method for retrieving a user input as a double
     {
         double userInput;
         while (true)
@@ -83,15 +81,15 @@ public class Methods
         return userInput;
     }
 
-    public static void PrintAccounts()
+    public static void PrintAccounts() //We added this method to display all the accounts that are created
     {
         Console.Clear();
         Methods.PrintMenuLogo();
         Console.WriteLine("-- These are all accounts --\n");
-        foreach (var accounts in Customer.AccountList)
-        {
+        foreach (var accounts in Customer.AccountList) //Since we have a static list 'AccountList' that every account that are created in the CreateNewAccount method
+        {                                             //also adds the account to the list we run them in this loop
             {
-                switch (accounts)
+                switch (accounts) //And made a swtich case that switch on the account type!
                 {
                     case Checking checkingAccount:
                         Console.WriteLine(
@@ -113,16 +111,16 @@ public class Methods
         Console.ReadKey();
     }
 
-    public static void PrintLogo()
-    {
-
+    public static void PrintLogo() //We added this method for display our big logo
+    {                             //The logo is in a seperate file, so the first thing we tell users in our ReadMe is to change the  
+                                  //pathway to your own C:\YourUsers etc for this to work. We wanted to try using a file for this
         string path = @"C:\Users\emilc\source\repos\ThePenguinBank\PenguinLogo.txt";
         string readText = File.ReadAllText(path);
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.ForegroundColor = ConsoleColor.DarkGreen; //Sets the color on the text
         Console.WriteLine(readText);
         Console.ResetColor();
     }
-    public static void PrintMenuLogo() 
+    public static void PrintMenuLogo() //Also added a smaler menu logo that follows you in the menu
     {
         Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.DarkGreen;

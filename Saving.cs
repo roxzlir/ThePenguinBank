@@ -6,8 +6,8 @@
         { 
         }
         
-        public static void CreateSavingAccount()
-        {
+        public static void CreateSavingAccount() //We have a equal method for CheckingAccount
+        {                                       // for more info, see Class Checking and CreateCheckingAccount() for more comments on the thoughts on this
             Console.Clear();
             Methods.PrintMenuLogo();
 

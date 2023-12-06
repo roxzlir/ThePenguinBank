@@ -10,7 +10,7 @@ namespace ThePenguinBank
 
         static void Main()
         {
-            // Lägga kommentarar om allt
+            // OBS SE LÄNGST NER PÅ LOAN!!!
 
             Methods.Run();
         }

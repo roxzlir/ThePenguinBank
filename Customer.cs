@@ -87,13 +87,13 @@ namespace ThePenguinBank
             {
                 Console.WriteLine("What account do you want to deposit to?");
                 int i = 1;
-                foreach (var account in AccountList)
-                {
+                foreach (var account in AccountList) //We made a foreach loop to display all the account that is available to make a deposit to since it's hard for a user 
+                {                                   //to know all the accounts that exist.
 
                     Console.WriteLine($"{i++}.{account.AccountID}");
 
                 }
-                var toAccount = int.Parse(Console.ReadLine()) - 1;
+                var toAccount = int.Parse(Console.ReadLine()) - 1; //User then selects one account
 
                 Console.WriteLine("How much would you like to deposit?");
                 int amount = int.Parse(Console.ReadLine());
@@ -103,7 +103,7 @@ namespace ThePenguinBank
                     Console.WriteLine("You have to enter a valid number!");
                 }
 
-                AccountList[toAccount].Balance += amount;
+                AccountList[toAccount].Balance += amount; //and here we add the amount to the accounts balance property
 
                 Console.WriteLine($"You have deposited {amount} to {AccountList[toAccount].AccountID}");
                 break;
@@ -111,7 +111,7 @@ namespace ThePenguinBank
             Console.Write("Please press any key to exit to menu: ");
             Console.ReadKey();
         }
-        public static void Transfer()
+        public static void Transfer() //The method for transfering funds from one balance property to antoher
         {
             Console.Clear();
             Methods.PrintMenuLogo();
@@ -120,16 +120,16 @@ namespace ThePenguinBank
                 Console.WriteLine("What account do you want to transfer from?");
 
                 int i = 1;
-                foreach (var account in AccountList)
+                foreach (var account in AccountList) //Here we made the same solution as in deposit
                 {
                     Console.WriteLine($"{i++}. Account: {account.AccountID} - Balance: {account.Balance}");
                 }
 
-                var fromAccount = int.Parse(Console.ReadLine()) - 1;
+                var fromAccount = int.Parse(Console.ReadLine()) - 1; 
 
                 Console.WriteLine("What account do you want to transfer to?");
                 int y = 1;
-                foreach (var account in AccountList)
+                foreach (var account in AccountList) //And repeated it again for the account that will receive a new balance amount
                 {
                     Console.WriteLine($"{y++}. Account: {account.AccountID} - Balance: {account.Balance}");
                 }
@@ -141,20 +141,21 @@ namespace ThePenguinBank
                 Console.WriteLine("How much would you like to transfer?");
                 int amount = int.Parse(Console.ReadLine());
 
-                if (amount <= 0 || amount > AccountList[fromAccount].Balance)
+                if (amount <= 0 || amount > AccountList[fromAccount].Balance) //Added if statement as a fail safe if there isn't enough funds in the balance property
                 {
                     Console.WriteLine("Invalid transfer, the amount is too big or invalid!");
                     return;
                 }
 
-                AccountList[fromAccount].Balance -= amount;
+                AccountList[fromAccount].Balance -= amount; //The acctual transfer process.
                 AccountList[toAccount].Balance += amount;
                 Console.Clear();
                 Methods.PrintMenuLogo();
                 Console.WriteLine(amount + " transferred from " + AccountList[fromAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID} to " +
                                   AccountList[toAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID}");
                 
-                
+                //Since we want to be able to display all transactions in our next method we made a very simple solution. We created a static list, TransactionsList with a string input
+                //and the we just took the text from above and used ToString method and saved to whole thing!
                 TransactionsList.Add((("$" + amount + " transferred from " + AccountList[fromAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID} to " +
                                   AccountList[toAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID}")).ToString());
                      
@@ -163,11 +164,11 @@ namespace ThePenguinBank
             Console.Write("Please press any key to exit to menu: ");
             Console.ReadKey();
         }
-        public static void PrintTransactions()
+        public static void PrintTransactions() //And here is the method were we just print the TransactionsList in a foreach loop
         {
             Console.Clear();
             Methods.PrintMenuLogo(); 
-            foreach (var transaction in TransactionsList)
+            foreach (var transaction in TransactionsList) 
             {
                 Console.WriteLine($"--------------------------\n{transaction}\n--------------------------\n");
             }
