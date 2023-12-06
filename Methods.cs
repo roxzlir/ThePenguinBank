@@ -10,9 +10,9 @@ public class Methods
     {
         Console.Clear();
         Methods.PrintLogo();
-        Customer customer = new Customer(8808227832, 49799291, 5000, "Emil Nordin", 123);
+        Customer customer2 = new Customer(8808227832, 49799291, 5000, "Emil Nordin", 123);
         Customer customer1 = new Customer(9907139100, 45493109, 32000, "Theres Sundberg", 321);
-        LogInList.Add(customer);
+        LogInList.Add(customer2);
         LogInList.Add(customer1);
         Checking acc1 = new Checking(8808227832, 44500172, 10000);
         Saving acc2 = new Saving(8808227832, 90231141, 56322);
@@ -23,26 +23,46 @@ public class Methods
         Customer.AccountList.Add(acc3);
         Customer.AccountList.Add(acc4);
 
-        int loginReturnResult = LoginAs();
+        Console.WriteLine();
+        int attempts = 0;
+        int maxAttempts = 3;
 
-        switch (loginReturnResult)
+        while (attempts < maxAttempts)
         {
-            case 1:
-                Console.Clear();
-                Methods.PrintMenuLogo();
-                Customer.CustomerMenu();
-                break;
-            case 2:
-                Console.Clear();
-                Methods.PrintMenuLogo();
-                Admin.AdminMenu();
-                break;
-            case 3:
-                Console.WriteLine("Du har gjort dina 3 försök.");
-                break;
-            default:
-                break;
+            Console.Write("Please enter customer ID: ");
+
+            double userCustomerIDInput = GetInputNumber();
+            Console.Write($"Please enter password for ID {userCustomerIDInput}: ");
+            double userPasswordInput = GetInputNumber();
+
+            foreach (var customer in LogInList)
+            {
+                if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
+                {
+                    Console.Clear();
+                    Methods.PrintMenuLogo();
+                    Customer.CustomerMenu();
+                    break;
+                }
+                else if (userCustomerIDInput == 11111 && userPasswordInput == 00000)
+                {
+                    Console.Clear();
+                    Methods.PrintMenuLogo();
+                    Admin.AdminMenu();
+                    break;
+
+                }
+                else
+                {
+                    Console.WriteLine("You need to enter a valid log in.");
+                    attempts++;
+                    Console.WriteLine($"Login attempts {attempts} of {maxAttempts}.");
+                    break;
+                    
+                }
+            }
         }
+
     }
 
     public static double GetInputNumber()
@@ -61,41 +81,6 @@ public class Methods
         }
 
         return userInput;
-    }
-
-    public static int LoginAs()
-    {
-        Console.WriteLine();
-        int attempts = 0;
-        int maxAttempts = 3;
-
-        while (attempts < maxAttempts)
-        {
-            Console.Write("Please enter customer ID: ");
-
-            double userCustomerIDInput = GetInputNumber();
-            Console.Write($"Please enter password for ID {userCustomerIDInput}: ");
-            double userPasswordInput = GetInputNumber();
-
-            foreach (var customer in LogInList)
-            {
-                if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
-                {
-                    return 1;
-                }
-                else if (userCustomerIDInput == 11111 && userPasswordInput == 00000)
-                {
-                    return 2;
-
-                }
-                else
-                {
-                    Console.WriteLine("You need to enter a valid log in.");
-                    break;
-                }
-            }
-        }
-        return 3;   
     }
 
     public static void PrintAccounts()

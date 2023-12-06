@@ -19,11 +19,9 @@ namespace ThePenguinBank
             Password = password;
         }
         
-       public static int CustomerMenu()
+       public static void CustomerMenu() //The customer menu:
         {
-           
-            int choice;
-            
+            double choice;
             Console.WriteLine("You are now logged in as a Penguin customer!\n");
             do
             {
@@ -37,15 +35,14 @@ namespace ThePenguinBank
                 Console.WriteLine("6. Deposit");
                 Console.WriteLine("7. Exchange currency");
                 Console.WriteLine("8. Print Transactions");
-
                 Console.WriteLine("0. Log out");
 
-                while (!int.TryParse(Console.ReadLine(), out choice))
+                while (!double.TryParse(Console.ReadLine(), out choice))
                 {
                     Console.WriteLine("Invalid input, try again.");
                 }
 
-                switch (choice)
+                switch (choice) //As in the admin menu we take the users input and run a switch case with the choice and start the method for that function.
                 {
                     case 1:
                         Checking.CreateCheckingAccount();
@@ -63,7 +60,7 @@ namespace ThePenguinBank
                         Loan.ApplyForLoan();
                         break;
                     case 6:
-                        Customer.Deposit();
+                        Deposit();
                         break;
                     case 7:
                         Admin.SEKToUSD();
@@ -80,16 +77,15 @@ namespace ThePenguinBank
                 }
             } while (choice != 0);
 
-            return choice;
+
         }
-        public static void Deposit()
+        public static void Deposit() //This is our method for deposit funds in to accounts.
         {
             Console.Clear();
             Methods.PrintMenuLogo();
             while (true)
             {
                 Console.WriteLine("What account do you want to deposit to?");
-
                 int i = 1;
                 foreach (var account in AccountList)
                 {
@@ -97,7 +93,6 @@ namespace ThePenguinBank
                     Console.WriteLine($"{i++}.{account.AccountID}");
 
                 }
-
                 var toAccount = int.Parse(Console.ReadLine()) - 1;
 
                 Console.WriteLine("How much would you like to deposit?");

@@ -11,18 +11,7 @@ namespace ThePenguinBank
         static void Main()
         {
             // Lägga kommentarar om allt
-            
-            // Varför har vi retur typ på CreateCustomer, gammal design som ligger kvar?
 
-           
-       
-           
-            
-
-            
-            
-            //Methods.PrintMenuLogo();
-            
             Methods.Run();
         }
         
