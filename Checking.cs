@@ -9,6 +9,8 @@
         }
         public static void CreateCheckingAccount()
         {
+            Console.Clear();
+            Methods.PrintMenuLogo();
             Console.WriteLine("Thank you for opening a new checking account at Penguin Bank");
 
             Console.Write("Please write your customer ID number: ");

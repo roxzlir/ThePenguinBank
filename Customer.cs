@@ -21,11 +21,14 @@ namespace ThePenguinBank
         
        public static int CustomerMenu()
         {
+           
             int choice;
-            Methods.PrintLogo();
+            
             Console.WriteLine("You are now logged in as a Penguin customer!\n");
             do
             {
+                Console.Clear();
+                Methods.PrintMenuLogo();
                 Console.WriteLine("1. Create Checking Account");
                 Console.WriteLine("2. Create Saving Account");
                 Console.WriteLine("3. Print Accounts");
@@ -54,7 +57,7 @@ namespace ThePenguinBank
                         Methods.PrintAccounts();
                         break;
                     case 4:
-                        Customer.Transfer();
+                        Transfer();
                         break;
                     case 5:
                         Loan.ApplyForLoan();
@@ -69,7 +72,7 @@ namespace ThePenguinBank
                         PrintTransactions();
                         break;
                     case 0:
-                        Methods.LoginAs();
+                        Methods.Run();
                         break;
                     default:
                         Console.WriteLine("That was not a valid choice.");
@@ -81,6 +84,8 @@ namespace ThePenguinBank
         }
         public static void Deposit()
         {
+            Console.Clear();
+            Methods.PrintMenuLogo();
             while (true)
             {
                 Console.WriteLine("What account do you want to deposit to?");
@@ -108,10 +113,13 @@ namespace ThePenguinBank
                 Console.WriteLine($"You have deposited {amount} to {AccountList[toAccount].AccountID}");
                 break;
             }
-            Console.WriteLine();
+            Console.Write("Please press any key to exit to menu: ");
+            Console.ReadKey();
         }
         public static void Transfer()
         {
+            Console.Clear();
+            Methods.PrintMenuLogo();
             while (true)
             {
                 Console.WriteLine("What account do you want to transfer from?");
@@ -133,6 +141,8 @@ namespace ThePenguinBank
 
                 var toAccount = int.Parse(Console.ReadLine()) - 1;
 
+                Console.Clear();
+                Methods.PrintMenuLogo();
                 Console.WriteLine("How much would you like to transfer?");
                 int amount = int.Parse(Console.ReadLine());
 
@@ -144,7 +154,8 @@ namespace ThePenguinBank
 
                 AccountList[fromAccount].Balance -= amount;
                 AccountList[toAccount].Balance += amount;
-
+                Console.Clear();
+                Methods.PrintMenuLogo();
                 Console.WriteLine(amount + " transferred from " + AccountList[fromAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID} to " +
                                   AccountList[toAccount].CustomerID + $" Account: {AccountList[fromAccount].AccountID}");
                 
@@ -154,15 +165,19 @@ namespace ThePenguinBank
                      
                 break;
             }
-            
-            Console.WriteLine();
+            Console.Write("Please press any key to exit to menu: ");
+            Console.ReadKey();
         }
         public static void PrintTransactions()
         {
+            Console.Clear();
+            Methods.PrintMenuLogo(); 
             foreach (var transaction in TransactionsList)
             {
                 Console.WriteLine($"--------------------------\n{transaction}\n--------------------------\n");
             }
+            Console.Write("Please press any key to exit to menu: ");
+            Console.ReadKey();
         }
     }
 }

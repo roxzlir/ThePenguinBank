@@ -24,6 +24,8 @@ internal class Admin
     }
     private static void SetCurrencyRate()
     {
+        Console.Clear();
+        Methods.PrintMenuLogo();
         Console.WriteLine($"Right now your US Dollar exchange rate value is: {USD}");
         Console.Write("To set new exchange rate press 1, to exit press any key: ");
         double menu = Methods.GetInputNumber();
@@ -40,10 +42,14 @@ internal class Admin
                 break;
         }
         Console.WriteLine($"New exchange rate value for USD is: {USD}");
-        Console.WriteLine();
+        Console.Write("Please press any key to exit to menu: ");
+        Console.ReadKey();
     }
-    private static Customer CreateNewCustomer()
+    private static void CreateNewCustomer()
     {
+
+        Console.Clear();
+        Methods.PrintMenuLogo();
         Console.Write("To add a new customer, please enter a new customer ID: ");
         double customerID = Methods.GetInputNumber();
         Random numberGenerator = new Random();
@@ -57,49 +63,55 @@ internal class Admin
         Console.Write("Please enter a password for this customer: ");
         double password = Methods.GetInputNumber();
 
-        Console.WriteLine("A new customer is now created, please press 1 and enter if you want a overview of the complete customer data. To exit this menu, press 0");
-        Console.Write("Enter choice: ");
-        double menuChoice = Methods.GetInputNumber();
+        //Console.WriteLine("A new customer is now created, please press 1 and enter if you want a overview of the complete customer data. To exit this menu, press 0");
+        //Console.Write("Enter choice: ");
+        //double menuChoice = Methods.GetInputNumber();
 
-        switch (menuChoice)
-        {
-            case 1:
-                Console.WriteLine($"New customer\nCustomer ID: {customerID}\nChecking accountnumber: {accountID}\nCustomer name: {name}" +
-                                  $"\nCustomer password: {password}");
-                break;
-            case 0:
-                Console.WriteLine("Closing menu.");
-                break;
-        }
+        //switch (menuChoice)
+        //{
+        //    case 1:
+        //        Console.WriteLine($"New customer\nCustomer ID: {customerID}\nChecking accountnumber: {accountID}\nCustomer name: {name}" +
+        //                          $"\nCustomer password: {password}");
+        //        break;
+        //    case 0:
+        //        Console.WriteLine("Closing menu.");
+        //        break;
+        //}
 
         
         Customer createdCustomer = new Customer(customerID, accountID, balance, name, password);
         Methods.LogInList.Add(createdCustomer);
-        return createdCustomer;
+         
     }
 
     public static void SEKToUSD()
     {
+        Console.Clear();
+        Methods.PrintMenuLogo();
         Console.Write("Convert an amount in Swedish Krona (SEK) to US Dollar (USD): ");
         decimal SEK = GetInputDecimal();
         
         decimal ExchangeRate = SEK / USD;
         Console.WriteLine(SEK + " SEK converts to " + Math.Round(ExchangeRate) + " USD.");
-        Console.WriteLine();
+        Console.Write("Please press any key to exit to menu: ");
+        Console.ReadKey();
     }
     public static void AdminMenu()
     {
-        Methods.PrintLogo();
-        
-        Console.WriteLine("You are now logged in as Admin\n");
-   
+
+        double choice;
         do
         {
+            Console.Clear();
+            Methods.PrintMenuLogo();
+            Console.WriteLine("You are now logged in as Admin\n");
+
             Console.WriteLine("1. Create New Customer");
             Console.WriteLine("2. Set Currency Rate");
             Console.WriteLine("3. Display Next Transaction Time (VARNING, when displayed the time will continue until reboot program)");
             Console.WriteLine("0. Log out");
-            double choice = Methods.GetInputNumber();
+            choice = Methods.GetInputNumber();
+
             switch (choice)
             {
                 case 1:
@@ -112,17 +124,22 @@ internal class Admin
                     RunTransactionTimerInBackground();
                     break;
                 case 0:
-                    Methods.LoginAs();
+                    Methods.Run();
                     break;
                 default:
                     Console.WriteLine("That was not a valid choice.");
                     break;
             }
-        } while (true);
+        
+        } while (choice != 0);
+       
     }
 
     private static void RunTransactionTimerInBackground()
     {
+        Console.Clear();
+        Methods.PrintMenuLogo();
+
         Console.WriteLine("Await next transaction time... Perfect time for a quick coffee run ;D");
         Console.WriteLine("While you wait, remember to press a key when you want to go back to menu!");
 

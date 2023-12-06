@@ -4,6 +4,9 @@
     { 
         public static void ApplyForLoan()
         {
+            Console.Clear();
+            Methods.PrintMenuLogo();
+
             Console.WriteLine("You want to apply for a loan, please enter your Customer ID: ");
             var requestingCustomerID = Methods.GetInputNumber();
 
@@ -45,8 +48,8 @@
                         : "You are denied for this loan.");
                     break;
             }
-
-            Console.WriteLine();
+            Console.Write("Please press any key to exit to menu: ");
+            Console.ReadKey();
         }
     }
 }

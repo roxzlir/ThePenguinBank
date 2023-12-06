@@ -1,11 +1,15 @@
 namespace ThePenguinBank;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
+
 public class Methods
 {
     public static List<Customer> LogInList = new();
 
     public static void Run()
     {
+        Console.Clear();
+        Methods.PrintLogo();
         Customer customer = new Customer(8808227832, 49799291, 5000, "Emil Nordin", 123);
         Customer customer1 = new Customer(9907139100, 45493109, 32000, "Theres Sundberg", 321);
         LogInList.Add(customer);
@@ -24,9 +28,13 @@ public class Methods
         switch (loginReturnResult)
         {
             case 1:
+                Console.Clear();
+                Methods.PrintMenuLogo();
                 Customer.CustomerMenu();
                 break;
             case 2:
+                Console.Clear();
+                Methods.PrintMenuLogo();
                 Admin.AdminMenu();
                 break;
             case 3:
@@ -78,21 +86,23 @@ public class Methods
                 else if (userCustomerIDInput == 11111 && userPasswordInput == 00000)
                 {
                     return 2;
+
                 }
                 else
                 {
                     Console.WriteLine("You need to enter a valid log in.");
+                    break;
                 }
-
             }
         }
-
-        return 3;
+        return 3;   
     }
 
     public static void PrintAccounts()
     {
-        Console.WriteLine("These are your accounts");
+        Console.Clear();
+        Methods.PrintMenuLogo();
+        Console.WriteLine("-- These are all accounts --\n");
         foreach (var accounts in Customer.AccountList)
         {
             {
@@ -114,14 +124,30 @@ public class Methods
             }
         }
 
-        Console.WriteLine();
+        Console.Write("Please press any key to exit to menu: ");
+        Console.ReadKey();
     }
 
     public static void PrintLogo()
     {
 
-        string path = @" HERE you need to add your directory, ex: C:\Users\youruser\source\repos\ThePenguinBank\PenguinLogo.txt";
+        string path = @"C:\Users\emilc\source\repos\ThePenguinBank\PenguinLogo.txt";
         string readText = File.ReadAllText(path);
-            Console.WriteLine(readText);
+        
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine(readText);
+        Console.ResetColor();
+    }
+    public static void PrintMenuLogo() 
+    {
+        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine(@"  
+   _    
+ ('v')  The
+//-=-\\ Penguin
+(\_=_/) Bank
+ ^^ ^^");
+        Console.ResetColor();
     }
 }

@@ -8,6 +8,9 @@
         
         public static void CreateSavingAccount()
         {
+            Console.Clear();
+            Methods.PrintMenuLogo();
+
             Console.WriteLine("Thank you for opening a new saving account at Penguin Bank");
 
             Console.Write("Please write your customer ID number: ");
