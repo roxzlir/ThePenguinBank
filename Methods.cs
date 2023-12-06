@@ -133,7 +133,6 @@ public class Methods
 
         string path = @"C:\Users\emilc\source\repos\ThePenguinBank\PenguinLogo.txt";
         string readText = File.ReadAllText(path);
-        
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine(readText);
         Console.ResetColor();
