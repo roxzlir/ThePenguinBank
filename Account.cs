@@ -1,6 +1,6 @@
 ﻿namespace ThePenguinBank
 {
-    public abstract class Account
+    public abstract class Account 
     {
         public double CustomerID { get; set; }
         public int AccountID { get; set; } 

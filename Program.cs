@@ -10,7 +10,7 @@ namespace ThePenguinBank
 
         static void Main()
         {
-            // OBS SE LÄNGST NER PÅ LOAN!!!
+            
 
             Methods.Run();
         }
