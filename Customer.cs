@@ -90,7 +90,7 @@ namespace ThePenguinBank
                 foreach (var account in AccountList) //We made a foreach loop to display all the account that is available to make a deposit to since it's hard for a user 
                 {                                   //to know all the accounts that exist.
 
-                    Console.WriteLine($"{i++}.{account.AccountID}");
+                    Console.WriteLine($"{i++}.{account.AccountID} (customer ID: {account.CustomerID})");
 
                 }
                 var toAccount = int.Parse(Console.ReadLine()) - 1; //User then selects one account
@@ -105,7 +105,7 @@ namespace ThePenguinBank
 
                 AccountList[toAccount].Balance += amount; //and here we add the amount to the accounts balance property
 
-                Console.WriteLine($"You have deposited {amount} to {AccountList[toAccount].AccountID}");
+                Console.WriteLine($"You have deposited {amount} to account  {AccountList[toAccount].AccountID} owned by customer ID {AccountList[toAccount].CustomerID}");
                 break;
             }
             Console.Write("Please press any key to exit to menu: ");

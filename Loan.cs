@@ -21,7 +21,7 @@
             int i = 1;
             foreach (var account in applyList) //And we run it to the loop
             {
-                Console.WriteLine($"{i++}.{account.AccountID}");
+                Console.WriteLine($"Account: {i++}.{account.AccountID} - Your available balance: {account.Balance}");
             }
             var loanAccount = int.Parse(Console.ReadLine()!) - 1;
             var loanAmount = Customer.AccountList[loanAccount].Balance * 5; //And here we set the condition that loanAmount can max be 5 times what there is on the account
@@ -29,14 +29,14 @@
             switch (loanAmount) //And then we made a simple switch case to be able to present different interest based on which amount the 
             {                  //user want to borrow
                 case <= 50000:
-                    Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
+                    Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for maximum: {loanAmount}");
                     Console.WriteLine("The interest for a loan up to 50 000 is 10%");
                     Console.WriteLine(requestedAmount < loanAmount
                         ? "You are approved for this loan!"
                         : "You are denied for this loan.");
                     break;
                 case > 50000 and <= 150000:
-                    Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
+                    Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for maximum: {loanAmount}");
                     Console.WriteLine("The interest for a loan between 50 000 - 150 000 is 7%");
 
                     Console.WriteLine(requestedAmount < loanAmount
@@ -44,7 +44,7 @@
                         : "You are denied for this loan.");
                     break;
                 default:
-                    Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for: {loanAmount}");
+                    Console.WriteLine($"Based on your balance ({Customer.AccountList[loanAccount].Balance}), we can approve a loan for maximum: {loanAmount}");
                     Console.WriteLine("The interest for a loan above 150 000 is 4%");
                 
                     Console.WriteLine(requestedAmount < loanAmount

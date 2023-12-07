@@ -33,17 +33,16 @@
                 Console.WriteLine("Your new checking account:\n" + "Customer ID: " + newAccount.CustomerID +
                                   "\nAccount number: " + newAccount.AccountID +
                                   "\nCurrent balance: " + newAccount.Balance);
-                Console.WriteLine("Press any key + enter to exit");
-                Console.ReadLine();
+                Console.Write("Please press any key to exit to menu: ");
+                Console.ReadKey();
             }
             else
             {
                 Console.WriteLine("Thank you for choosing Penguin Bank services!");
+                Console.Write("Please press any key to exit to menu: ");
+                Console.ReadKey();
             }
-
             Customer.AccountList.Add(new Checking(customerID, accountID, balance)); //Here we add the created account to our static AccountList to be able to use them in other methods
-            Console.Write("Please press any key to exit to menu: ");
-            Console.ReadKey();
         }
     }
 }

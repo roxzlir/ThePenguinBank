@@ -4,7 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 
 public class Methods
 {
-    public static List<Customer> LogInList = new(); //We added a static List to add our customer object's in to be able to match them in the login 
+    public static readonly List<Customer> LogInList = new(); //We added a static List to add our customer object's in to be able to match them in the login 
 
     public static void Run() //This is the method that we use as our "main" method, to run the Login and then the actual menu choices
     {

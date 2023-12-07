@@ -33,8 +33,8 @@
                 Console.WriteLine("Your new checking account:\n" + "Customer ID: " + newAccount.CustomerID +
                                   "\nAccount number: " + newAccount.AccountID +
                                   "\nCurrent balance: " + newAccount.Balance);
-                Console.WriteLine("Press any key + enter to exit");
-                Console.ReadLine();
+                Console.WriteLine("Press any key to exit");
+                Console.ReadKey();
             }
             else
             {

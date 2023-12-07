@@ -1,8 +1,9 @@
 using System.Timers;
 
 namespace ThePenguinBank;
-internal class Admin 
+public class Admin 
 {
+    
     private static decimal USD = 10.49M; //We have chose to set a starting value of USD currency rate as a property.
     private static decimal GetInputDecimal() //We created a method to receive a user input in decimal data type to be able to set the currency rate with decimals.
     {
