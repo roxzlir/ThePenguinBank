@@ -5,8 +5,9 @@ namespace ThePenguinBank
 {
     public class Customer : Account
     {
-        public static readonly List<Account> AccountList = new();
-        public static readonly List<string> TransactionsList = new();
+        public static readonly List<Account> AccountList = new(); //Our account list that we use in several methods
+        public static readonly List<string> TransactionsList = new(); //This is our transaction list that we store all transaction messages in and then we can display them as "made transactions"
+        public static readonly List<Customer> LogInList = new(); //We added a static List to add our customer object's in to be able to match them in the login
 
         public string Name { get; set; }
         public double Password { get; set; }
@@ -19,7 +20,7 @@ namespace ThePenguinBank
             Password = password;
         }
         
-       public static void CustomerMenu() //The customer menu:
+        public static void CustomerMenu() //The customer menu:
         {
             double choice;
             Console.WriteLine("You are now logged in as a Penguin customer!\n");

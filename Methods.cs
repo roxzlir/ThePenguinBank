@@ -4,16 +4,16 @@ using System.Reflection.Metadata.Ecma335;
 
 public class Methods
 {
-    public static readonly List<Customer> LogInList = new(); //We added a static List to add our customer object's in to be able to match them in the login 
+     
 
     public static void Run() //This is the method that we use as our "main" method, to run the Login and then the actual menu choices
     {
         Console.Clear();
-        Methods.PrintLogo();
+        PrintLogo();
         Customer customer2 = new Customer(8808227832, 49799291, 5000, "Emil Nordin", 123);
         Customer customer1 = new Customer(9907139100, 45493109, 32000, "Theres Sundberg", 321);
-        LogInList.Add(customer2);
-        LogInList.Add(customer1);
+        Customer.LogInList.Add(customer2);
+        Customer.LogInList.Add(customer1);
         Checking acc1 = new Checking(8808227832, 44500172, 10000);
         Saving acc2 = new Saving(8808227832, 90231141, 56322);
         Checking acc3 = new Checking(9907139100, 45470221, 32000);
@@ -35,7 +35,7 @@ public class Methods
             Console.Write($"Please enter password for ID {userCustomerIDInput}: ");
             double userPasswordInput = GetInputNumber();
 
-            foreach (var customer in LogInList) //Here we want the loop to check the static LogInList for every customer in it
+            foreach (var customer in Customer.LogInList) //Here we want the loop to check the static LogInList for every customer in it
             {
                 if (customer.CustomerID == userCustomerIDInput && customer.Password == userPasswordInput)
                 {                               //And if the customerID and customerPassword exists in the list and the user input matches that the if statment will run the   

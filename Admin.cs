@@ -4,6 +4,7 @@ namespace ThePenguinBank;
 public class Admin 
 {
     
+
     private static decimal USD = 10.49M; //We have chose to set a starting value of USD currency rate as a property.
     private static decimal GetInputDecimal() //We created a method to receive a user input in decimal data type to be able to set the currency rate with decimals.
     {
@@ -46,7 +47,7 @@ public class Admin
         Console.Write("Please press any key to exit to menu: ");
         Console.ReadKey();
     }
-    private static void CreateNewCustomer() //We added the create new customer in admin class since it will be in the admin menu choice. 
+    public static void CreateNewCustomer() //We added the create new customer in admin class since it will be in the admin menu choice. 
     {
         Console.Clear();
         Methods.PrintMenuLogo();
@@ -60,21 +61,19 @@ public class Admin
         Console.Write("Please enter the new customer's name: ");
         var name = Console.ReadLine();
 
-        int balance = 0;
+        int balance = 100;
 
         Console.Write("Please enter a password for this customer: ");
         double password = Methods.GetInputNumber(); //Admin will set the password.
 
         Console.WriteLine("A new customer is now created, here is a overview of the complete customer data:");
-        Console.WriteLine($"\nCustomer ID: {customerID}\nChecking accountnumber: {accountID}\nCustomer name: {name}" +
+        Console.WriteLine($"\nCustomer ID: {customerID}\nChecking accountnumber: {accountID}\nBalance: {balance}\n(we have added a welcome gift of 100:- to your account)\nCustomer name: {name}" +
                              $"\nCustomer password: {password}\n");
  
-        Customer createdCustomer = new Customer(customerID, accountID, balance, name, password); //We take all the data and create a new customer object.
-        Checking newChecking = new Checking(customerID, accountID, balance); //We add the same data for adding a new checking object or "Checkingaccount" in our bank.
 
-        Methods.LogInList.Add(createdCustomer); //We add the customer to our LogInList, this list is the base for our login process, we compare 
-                                               //the user input with this list of "approved" customerID's and passwords.
-        Customer.AccountList.Add(newChecking);//We also add the checking object to our AccountList to be used in serveral methods.
+        Customer.LogInList.Add(new Customer(customerID, accountID, balance, name, password)); //We add the customer to our LogInList, this list is the base for our login process, we compare 
+                                                                                    //the user input with this list of "approved" customerID's and passwords.
+        Customer.AccountList.Add(new Checking(customerID, accountID, balance));//We also add the checking object to our AccountList to be used in serveral methods.
 
         Console.Write("Please press any key to exit to menu: ");
         Console.ReadKey();
