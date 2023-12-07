@@ -6,8 +6,8 @@
         { 
         }
         
-        public static void CreateSavingAccount()
-        {
+        public static void CreateSavingAccount() //We have a equal method for CheckingAccount
+        {                                       // for more info, see Class Checking and CreateCheckingAccount() for more comments on the thoughts on this
             Console.Clear();
             Methods.PrintMenuLogo();
 
@@ -33,8 +33,8 @@
                 Console.WriteLine("Your new checking account:\n" + "Customer ID: " + newAccount.CustomerID +
                                   "\nAccount number: " + newAccount.AccountID +
                                   "\nCurrent balance: " + newAccount.Balance);
-                Console.WriteLine("Press any key + enter to exit");
-                Console.ReadLine();
+                Console.WriteLine("Press any key to exit");
+                Console.ReadKey();
             }
             else
             {
